@@ -40,6 +40,7 @@
 
   <style>
     :root {
+      --instagram-size: 20px; /* Kích thước Instagram: đổi thành 24px, 28px... tùy ý */
       --accent: #f2eff0;                       /* Đổi sang màu bạn muốn làm mặc định */
       --accent-glow: rgba(242, 239, 240, 0.4);
       --card-bg: rgba(18, 18, 28, 0.03); /* Mặc định 3% */
@@ -1046,12 +1047,51 @@
       transform: translateY(-4px) scale(1.25);
     }
 
-    .social-pill a.fb:hover, .social-pill a.fb:active { color: #1877f2; }
-    .social-pill a.sp:hover, .social-pill a.sp:active { color: #1ed760; }
-    .social-pill a.tt:hover, .social-pill a.tt:active { color: #030303; }
-    .social-pill a.dc:hover, .social-pill a.dc:active { color: #5865f2; }
-    .social-pill a.ig:hover, .social-pill a.ig:active { color: #e1306c; }
-    .social-pill a.ng:hover, .social-pill a.ng:active { color: #f7f6f6; }
+    .social-pill a.fb { color: #0866FF; }
+    .social-pill a.sp { color: #1ed760; }
+    .social-pill a.tt { color: #030303; }
+    .social-pill a.dc { color: #5865F2; }
+    .social-pill a.ig { color: #e1306c; }
+    .social-pill a.zl { color: #0068FF; }
+
+    /* Giữ ô nút cũ; ảnh được bù khoảng trong suốt để đúng kích thước hiển thị. */
+    .social-pill .social-logo-frame {
+      position: relative;
+      display: block;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+    }
+
+    .social-pill a.tt .social-logo-frame {
+      width: 0.875em;
+    }
+
+    .social-pill .social-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      max-width: none;
+      object-fit: contain;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .social-pill a.tt .social-logo {
+      width: 1.1452em;
+      height: 1.1452em;
+    }
+
+    .social-pill a.ig .social-logo {
+      width: calc(var(--instagram-size) * 1.2151);
+      height: calc(var(--instagram-size) * 1.2151);
+    }
+
+    .social-pill a.zl .social-logo {
+      width: 1.05em;
+      height: 1.05em;
+    }
 
     /* Tooltip */
     .social-pill .tooltip {
@@ -1434,6 +1474,12 @@
       transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* Khi đóng bảng xem trước, mọi phần tử bên trong phải nhường thao tác cho giao diện bên dưới. */
+    .avatar-preview-overlay:not(.active),
+    .avatar-preview-overlay:not(.active) * {
+      pointer-events: none !important;
+    }
+
     .avatar-preview-overlay.active {
       opacity: 1;
       pointer-events: auto;
@@ -1556,8 +1602,8 @@
     /* Khung ảnh Avatar 3D nổi khối (Hình tròn hoàn hảo) */
     .avatar-preview-img-wrap {
       position: relative;
-      width: 210px;
-      height: 210px;
+      width: 140px;
+      height: 140px;
       margin: 0 auto 16px;
       border-radius: 50%;
       transform-style: preserve-3d;
@@ -1614,21 +1660,21 @@
     }
 
     .avatar-preview-tag {
-      font-size: 11px;
+      font-size: 2px;
       color: rgba(255, 255, 255, 0.6);
       letter-spacing: 0.5px;
     }
 
     /* Chú thích chạm để đóng */
     .avatar-preview-hint {
-      font-size: 10px;
+      font-size: 8px;
       color: rgba(255, 255, 255, 0.45);
       letter-spacing: 0.3px;
       transform: translateZ(22px);
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -1711,10 +1757,10 @@
   <div class="profile-wrapper">
     <div class="profile-card" id="profileCard">
 
-      <!-- Status badge (Đồng hồ thời gian thực) -->
-      <div class="status-badge">
-        <i class="fa-regular fa-clock" style="color: #4292ed;"></i>
-        <span id="previewRealtime">--:--:--</span>
+      <!-- Chạm để đổi địa điểm Hà Nội / Nghệ An -->
+      <div class="avatar-preview-badge" id="locationBadge" role="button" tabindex="0" title="Chạm để đổi địa điểm" aria-label="Đổi địa điểm">
+        <i class="fa-solid fa-location-dot status-location-icon"></i>
+        <span id="statusText" aria-live="polite">HÀ NỘI</span>
       </div>
 
       <!-- AVATAR (KHÔNG VIỀN, KHÔNG BÓNG VUÔNG, CHỈ MỖI AVATAR) -->
@@ -1799,7 +1845,7 @@
         </li>
         <li>
           <a href="https://www.tiktok.com/@ngochaolimited.06" target="_blank" class="tt" aria-label="TikTok">
-            <i class="fab fa-tiktok"></i>
+            <span class="social-logo-frame" aria-hidden="true"><img src="social-tiktok.png" alt="" class="social-logo" draggable="false"></span>
           </a>
           <span class="tooltip">TikTok</span>
         </li>
@@ -1811,15 +1857,15 @@
 </li>
         <li>
           <a href="https://www.instagram.com/ngochaopremium.06/" target="_blank" class="ig" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
+            <span class="social-logo-frame" aria-hidden="true"><img src="social-instagram.png?v=2" alt="" class="social-logo" draggable="false"></span>
           </a>
           <span class="tooltip">Instagram</span>
         </li>
         <li>
-          <a href="https://ngl.link/_.ngnghao._2" target="_blank" class="ng" aria-label="NGL">
-            <i class="fas fa-comment-dots"></i>
+          <a href="https://zalo.me/0334025718" target="_blank" rel="noopener noreferrer" class="zl" aria-label="Zalo">
+            <span class="social-logo-frame" aria-hidden="true"><img src="social-zalo.svg" alt="" class="social-logo" draggable="false"></span>
           </a>
-          <span class="tooltip">NGL</span>
+          <span class="tooltip">Zalo</span>
         </li>
       </ul>
 
@@ -1883,10 +1929,10 @@
         <!-- Nút đóng nhanh góc trên -->
         <button class="avatar-preview-close" id="avatarPreviewClose" title="Close Preview"><i class="fas fa-times"></i></button>
 
-        <!-- Badge nhãn địa điểm Hà Nội / Nghệ An -->
-        <div class="avatar-preview-badge">
-          <i class="fa-solid fa-location-dot status-location-icon"></i>
-          <span id="statusText">HÀ NỘI</span>
+        <!-- Status badge (Đồng hồ thời gian thực) -->
+        <div class="status-badge">
+          <i class="fa-regular fa-clock" style="color: #4292ed;"></i>
+          <span id="previewRealtime">--:--:--</span>
         </div>
 
         <!-- Khung ảnh Avatar 3D nổi khối -->
@@ -2532,22 +2578,27 @@
     typeLoop();
 
     // =========================================
-    // STATUS BADGE: THAY PHIÊN "HÀ NỘI" VÀ "NGHỆ AN" MỖI 5 GIÂY
+    // LOCATION: MẶC ĐỊNH HÀ NỘI, CHẠM ĐỂ ĐỔI ĐỊA ĐIỂM
     // =========================================
     const statusLocations = ["HÀ NỘI", "NGHỆ AN"];
     let locIdx = 0;
     const statusEl = document.getElementById("statusText");
+    const locationBadge = document.getElementById("locationBadge");
 
-    if (statusEl) {
-      statusEl.style.transition = "opacity 0.35s ease";
-      setInterval(() => {
-        statusEl.style.opacity = "0";
-        setTimeout(() => {
-          locIdx = (locIdx + 1) % statusLocations.length;
-          statusEl.textContent = statusLocations[locIdx];
-          statusEl.style.opacity = "1";
-        }, 350);
-      }, 5000);
+    if (statusEl && locationBadge) {
+      statusEl.textContent = statusLocations[locIdx];
+      const toggleLocation = () => {
+        locIdx = (locIdx + 1) % statusLocations.length;
+        statusEl.textContent = statusLocations[locIdx];
+      };
+
+      locationBadge.addEventListener("click", toggleLocation);
+      locationBadge.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleLocation();
+        }
+      });
     }
 
     // =========================================
