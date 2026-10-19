@@ -40,7 +40,7 @@
 
   <style>
     :root {
-      --instagram-size: 18px; /* Kích thước Instagram: đổi thành 24px, 28px... tùy ý */
+      --instagram-size: 18px; /* Kích thước icon Instagram trên desktop */
       --accent: #f2eff0;                       /* Đổi sang màu bạn muốn làm mặc định */
       --accent-glow: rgba(242, 239, 240, 0.4);
       --card-bg: rgba(18, 18, 28, 0.03); /* Mặc định 3% */
@@ -1278,6 +1278,10 @@
 
     /* Mobile responsive */
     @media (max-width: 480px) {
+      :root {
+        --instagram-size: 14px;
+      }
+
       .profile-card {
         padding: 24px 14px 18px;
         border-radius: 20px;
