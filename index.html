@@ -396,7 +396,7 @@
       -webkit-backdrop-filter: blur(var(--card-blur));
       border: 1px solid var(--card-border);
       border-radius: 24px;
-      padding: 34px 22px 20px;
+      padding: 34px 22px 72px;
       text-align: center;
       position: relative;
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
@@ -1265,6 +1265,50 @@
     /* =========================================
        COPYRIGHT (RẤT NHỎ VÀ TINH TẾ)
     ========================================= */
+    /* Mắt đậm 32px: ghim vào bảng profile, mở vừa chiều rộng số. */
+    .visitor-counter {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      min-width: 32px;
+      height: 32px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #f2eff0;
+      font: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .visitor-counter::after { content: ''; position: absolute; inset: -6px; border-radius: inherit; }
+    .visitor-counter:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.25); }
+    .visitor-counter:focus-visible { outline: 2px solid #f2eff0; outline-offset: 4px; }
+    .visitor-counter-eye { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; }
+    .visitor-counter-eye svg { width: 16px; height: 16px; stroke-width: 2.8; }
+    .visitor-counter-number {
+      display: block;
+      flex: 0 0 auto;
+      width: 0;
+      height: 20px;
+      margin-right: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: width 300ms cubic-bezier(.22, 1, .36, 1), margin-right 300ms cubic-bezier(.22, 1, .36, 1), opacity 140ms ease;
+    }
+    .visitor-counter[aria-expanded="true"] .visitor-counter-number { opacity: 1; margin-right: 8px; }
+    .visitor-counter-content { display: inline-block; height: 20px; line-height: 20px; white-space: nowrap; vertical-align: top; font-family: 'Poppins', Arial, sans-serif; font-size: 13px; font-weight: 600; font-variant-numeric: proportional-nums; letter-spacing: 0; -webkit-font-smoothing: antialiased; }
+    @media (prefers-reduced-motion: reduce) {
+      .visitor-counter, .visitor-counter-number { transition: none; }
+    }
+
     .copyright {
       margin-top: 14px;
       font-size: 12px !important;                 /* Thu nhỏ chữ copyright */
@@ -1283,7 +1327,7 @@
       }
 
       .profile-card {
-        padding: 24px 14px 18px;
+        padding: 24px 14px 70px;
         border-radius: 20px;
       }
 
@@ -1873,6 +1917,21 @@
         </li>
       </ul>
 
+      <!-- Một lần tải trang = một lượt xem; bấm mắt chỉ mở/đóng phần hiển thị. -->
+      <button class="visitor-counter" id="visitorCounter" type="button" aria-label="Hiện tổng lượt xem" aria-expanded="false" aria-controls="visitorCounterNumber">
+        <span class="visitor-counter-eye" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </span>
+        <span class="visitor-counter-number" id="visitorCounterNumber" aria-hidden="true">
+          <span class="visitor-counter-content" id="visitorCounterContent">
+            <span id="visitorCounterStatus">…</span>
+          </span>
+        </span>
+      </button>
+
       <!-- COPYRIGHT (ĐÃ GIẢM KÍCH THƯỚC CỰC NHỎ VÀ TINH TẾ) -->
       <div class="copyright">
         @ngochaodz
@@ -1973,6 +2032,64 @@
   <!-- =========================================
        JAVASCRIPT LOGIC
   ========================================= -->
+  <script>
+    (() => {
+      const counter = document.getElementById('visitorCounter');
+      const number = document.getElementById('visitorCounterNumber');
+      const content = document.getElementById('visitorCounterContent');
+      const status = document.getElementById('visitorCounterStatus');
+      let expanded = false;
+      let unavailable = false;
+      let total = null;
+
+      function renderCounter() {
+        counter.setAttribute('aria-expanded', String(expanded));
+        counter.setAttribute('aria-label', expanded
+          ? (unavailable ? 'Lượt xem tạm thời không khả dụng. Bấm để thu gọn'
+            : (total === null ? 'Đang tải lượt xem' : status.textContent + ' lượt xem. Bấm để thu gọn'))
+          : 'Hiện tổng lượt xem');
+        number.setAttribute('aria-hidden', String(!expanded));
+        number.style.width = expanded ? Math.ceil(content.getBoundingClientRect().width) + 'px' : '0px';
+      }
+
+      counter.addEventListener('click', (event) => {
+        event.stopPropagation();
+        expanded = !expanded;
+        renderCounter();
+      });
+      counter.addEventListener('keydown', (event) => {
+        if (event.key === ' ' || event.key === 'Enter') event.stopPropagation();
+        if (event.key === 'Escape') { expanded = false; renderCounter(); }
+      });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderCounter);
+      renderCounter();
+
+      // Tổng lượt cũ từ Hits.sh đã được chuyển sang khóa này khi đổi sang số dạng chữ.
+      // Chỉ tăng một lần khi tải trang; bấm mắt không gửi yêu cầu mới.
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+      fetch('https://countapi.mileshilliard.com/api/v1/hit/ngochaovjppro-xyz-profile-views-text-20261027?t=' + Date.now(), {
+        cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer', signal: controller.signal
+      })
+        .then(response => {
+          if (!response.ok) throw new Error('Counter unavailable');
+          return response.json();
+        })
+        .then(data => {
+          if (!Number.isSafeInteger(data.value) || data.value < 0) throw new Error('Invalid counter value');
+          total = data.value;
+          status.textContent = new Intl.NumberFormat('vi-VN').format(total);
+          renderCounter();
+        })
+        .catch(() => {
+          unavailable = true;
+          status.textContent = '—';
+          renderCounter();
+        })
+        .finally(() => clearTimeout(timeout));
+    })();
+  </script>
+
   <script>
     // =========================================
     // 0. TYPEWRITER MỜ MỜ CHO "CLICK TO ENTER"
