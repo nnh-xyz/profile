@@ -137,26 +137,6 @@
         pointer-events: none;
       }
 
-      .water-background {
-        overflow: hidden;
-        opacity: 0;
-        transition: opacity 120ms linear;
-      }
-      .water-background video,
-      .water-background canvas {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-      }
-      .water-background canvas { opacity: 0; }
-      .water-background.is-rippling canvas { opacity: 1; }
-      .water-background-ready .water-background { opacity: 1; }
-      .water-background-ready #bgPC,
-      .water-background-ready #bgMobile { display: none; }
-
       .pc-gif {
         display: block;
       }
@@ -2135,11 +2115,6 @@
       id="bgMobile"
       onerror="this.style.display = 'none'"
     />
-
-    <div class="bg-media water-background" id="waterBackground" aria-hidden="true">
-      <video id="waterBackgroundVideo" autoplay muted loop playsinline preload="auto"></video>
-      <canvas id="tapWaterCanvas"></canvas>
-    </div>
 
     <div class="ambient-orbs">
       <div class="orb orb-1"></div>
@@ -4194,6 +4169,8 @@
       (function () {
         const canvas = document.getElementById("neonRibbonCanvas");
         if (!canvas) return;
+        const mouseTrailEnabled = window.matchMedia("(hover: hover) and (pointer: fine) and (min-width: 769px)");
+        if (!mouseTrailEnabled.matches) return;
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
         let width = (canvas.width = window.innerWidth);
@@ -4227,13 +4204,9 @@
           if (frame !== null) cancelAnimationFrame(frame);
           frame = null;
         });
-        window.addEventListener("mousemove", (event) => {
-          if (event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) return;
+        window.addEventListener("pointermove", (event) => {
+          if (event.pointerType !== "mouse" || !mouseTrailEnabled.matches) return;
           addPoint(event.clientX, event.clientY);
-        }, { passive: true });
-        window.addEventListener("touchmove", (event) => {
-          if (!event.touches || !event.touches[0]) return;
-          addPoint(event.touches[0].clientX, event.touches[0].clientY);
         }, { passive: true });
         document.addEventListener("visibilitychange", () => {
           if (!document.hidden) return;
@@ -4310,6 +4283,5 @@
 
       updatePreviewClock();
     </script>
-    <script src="tap-water.js"></script>
   </body></html
 >
