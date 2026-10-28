@@ -47,7 +47,45 @@
         --card-blur: 3px;
         --card-border: rgba(255, 255, 255, 0.1);
         --text-main: #ffffff;
-        --text-muted: rgba(255, 255, 255, 0.65);
+                --text-muted: rgba(255, 255, 255, 0.65);
+
+        /* 1. Chuột bình thường: Boosheen Con Ma */
+        --cursor-default: url('boosheen_cursor.png') 4 2, url('data:image/png;base64,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') 4 2, auto;
+
+        /* 2. Chỉ chuột tương tác / Nút bấm / Link: Kẹo Halloween Candy */
+        --cursor-pointer: url('candy_pointer.png') 4 2, url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAAEEfUpiAAAACXBIWXMAAAsSAAALEgHS3X78AAAH/klEQVRYw8VXCVRU5xX+h0GN1hZJG2OOqRSjpjUxEFxQARWrQVk04ALWJW7QiksULaiNmgRUMMFwTCBuaIgKIiWagEhEUoMgRKAoSCRAKiqisqM4w2z/7b3/vPfOTKGpx57T3nPevHn/+/+73+/ex3wHuDNn9uIYT+akZjLFhLwLEunFQknOJY4ERoORM0s6/XEKiD+eKqdZfshLEJ7jMoMghxlqWtDR+bP7T4HV+R8Kr5sXfO3cxty/eRdufFehHL2ac0W89LOT+H66MZbv/XMk3K9rAK22C84dTAeTUVJJlu5n77Ht6PYELaA8krn3T5Ea9lNUe+0H9iobZH4IdV1YFOIS2Hs0cxhKHBWbiGb+bHx024MW4CaTQbbR65lxUcqGU7GfQ6LXNqE9yTaZTOKvB3slTHACfH5r2BIIHh0oXn6TlAFVxdfBqNGD2BDquqi47moVGPQGwUGmQ1v26SyVVr8fGF6eceCvshhu6QKF3ug9huUcyYDc41mCi6+de88+UJxnyWF6r9GRlAJXzhVA4BCvg9xggqIv8ygmz+HVm/aseG2uukfRGFBxuPHOfX4s8iC8HxQB6ycvF4alxByFlntN3GgwkIW6iJmh97qppG19LHTOW5kIkN4AcSFRlH+KV0qzC+DbE2a7KC8vfJ5pnVuPHrRDXXk1v6jVQf4dgBDneWBJX2Cw8tNyQPtYI2KhaemEbqasGrewVEpmCjlmm5GTNG7OLvGmvalVbLBnbJR3/wk23UyZ0c+VBb8eaGu55vOLiXHkH5PRJBiSFeifGvYkRCo6sH7d1hcO9YEeo/GkZHWQsMGVDSN7nt00LUQJUcDznsl0n2XvoXoiSRW5pSJK69yXlr4ze309/teMYPab8dXz8h6sI9WcQVOtD8561mPlvMHT6YCpuaFJOAmdbpIcL350HVrYs3xHC25/xp39Tr3k5dnWTG5d+1Fsrimrgpil24GKlLLwxK7DUJiZJ5hg/E1dHRroz5gjMrFRzBrEVK604UxCKk/yeQ9M3AQ9EUICJ6YlZwtEBBYN8zUzQHWOUPKkROMtqRoKgz9T4IGuLk0XXDqWCfU1t+SEMjqxwbMFbhLtmLOxkBZjlr0DYd6hsHbGckAgVCQX4OG0PUfhq9hj8pIh5PXA5JKcIpVgsHi43yHKtDX+YTyvSw+fRGRBeX6ZGWIw7+/W3obziENfJZxUGOCZw3tW7FBS2aarXQMdmOeVeaW89JvLVibQdfN6DZTkFAoooneY679981eTzRpQWAbiQnFGvhw2A4WR6p/wm9aotL8vKhfBiFu9S28VwqUj/ZkHGynUcWB9PdC+9H1ro5sxlIYy7BISUwUucVu/CWyEGnPHOrfRLoaLNg9bOlSWAhqqbpM/hDYGnZ7fr66HvowNxHJW/ceCaW9sVSHj5NriG1By7jKciU/ldRW1EDY1+GuzMk9BWNz2mAMr5r7we/XTMnh6IrN8pfan1ILfADd6UGMblFWyWT5qTn7L7UaqS3h70rIaWfBvWL9pCRs+gIf1rRA6flEpLlk5Evs8+UyNbUKFvYVZ9fmf0GoyHtiNEfQazHqN27dmt1aKuEm5oyKUrAbMdHpGsAB9lw5OYs/BPqQ5EP5R585FW2sQj9OmsFGhosYlcpdSbNkrAT1DKC6GBgz03DqRvRyfEPahwdx7DBy7Nj+yLR6iFmyGA+FxEI+Wl+YUQW5ylsjLjuY2OB51iCfvTuSoAK8svGaSOorgUVVQAasnLC7HDjKc5LhhwdDd/7kp1gpI6dRnm/+GKtni5ruNUJBxES5+kQOaR+am+ajtIWg6NUqZEt2pvgV/S/0aUAlsWW0SbHFBhAWEpZ3NDyHEJeg7Cq008XT3AhbFRhrcJO35lwmn4Pvw09il6+F4wC6IXBABNWU3ZAGKAvQfvaUglxahT5qQwKwGV0K53X/DTTmXqH36WoZj0/Q/nuc6o/B+XeWPfMFL3hAyKgBi/cIh6Q/RkDR/J0QFRiiCLIQoo8OFj09C5icnIQuvc/Gp0N7cZtbRKABM3/SPe4B5tofkYd9SW+VDuNeqXBCzCxgPb93HdwRsgP2x5yFhfwZsf3snhM5cBTSPYNeA6r+bPYGMzXdUIg/nltzEM5CFA1z2/jRIjTmCDeC2vE8ApElroMpJk8KuoupTaAxzDLp4IluEoLO1g/8lKIK/u2kvjwpPgKg5ibDWeQtcOn3BDObm2FqFQYwtaHHK7sOQFZsI2Z+mQGP9A5CQWChQ+W0ZvNFn7DpRESP9bZUQTGKviuQgSN/is6aJGie5jLzxL0jMFaEWvUJ5lhTR6/RQlHVJALD03tDe0AKLR8xKJzk5x8+qKBGVEFA7kOpVBiI1toc1m71XV6bHnYC6showPNbBvyGjhWJWCpIC9P5KZj5MYa9tkfq3Wh6GukGk/0BPqSLGsyCHmT0BNQ19OFWwIfjSCYeeiWOZ43rs348ssp4r3wvm2PPi7MuA3TP158LJjI1lQ22eaK5T5niEUj87NwW/CWapHc99YVoveu/I+rulRn8ml5teKmWjZejwenzrai342bvH0Jm1bm+pn3qwtFTuJWanfMa4MIc3cX09Krhuqsp5iQsb4vNr1mciIuG4+S9OT6m4UAI4e4o8QBRV/VcKyErM/uUk8+dRn7FsgaO3Oth5vu1Kp3m2iPtqHNzUKNhmqspJ9WHwe7a4Z+l4Nrwv7Z9m68L+JyR3QhHGAe42PX6e/b/pn74c9lxTA6ogAAAAAElFTkSuQmCC') 4 2, pointer;
+      }
+
+      html,
+      body {
+        cursor: var(--cursor-default);
+      }
+
+      a,
+      button,
+      input[type="range"],
+      .clickable,
+      .color-dot,
+      .top-btn,
+      .game-modal-close,
+      .avatar-preview-close,
+      .spotify-center-logo,
+      .social-pill a,
+      .mmb-btn,
+      .settings-slider,
+      .avatar-box {
+        cursor: var(--cursor-pointer) !important;
+      }
+
+      /* Canvas dải lụa neon */
+      .neon-ribbon-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none !important;
+        z-index: 99998;
       }
 
       * {
@@ -98,6 +136,26 @@
         transform: scale(1.04);
         pointer-events: none;
       }
+
+      .water-background {
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 120ms linear;
+      }
+      .water-background video,
+      .water-background canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+      .water-background canvas { opacity: 0; }
+      .water-background.is-rippling canvas { opacity: 1; }
+      .water-background-ready .water-background { opacity: 1; }
+      .water-background-ready #bgPC,
+      .water-background-ready #bgMobile { display: none; }
 
       .pc-gif {
         display: block;
@@ -635,6 +693,20 @@
         filter: drop-shadow(0 0 6px rgba(29, 161, 242, 0.7));
         animation: badgePulse 3s ease-in-out infinite;
         cursor: pointer;
+      }
+
+      #userName .verified-badge-wrap {
+        transform-origin: center;
+        animation: mainVerifiedPulse 1.6s ease-in-out infinite;
+      }
+
+      @keyframes mainVerifiedPulse {
+        0%, 100% { transform: scale(0.95) rotate(-2deg); }
+        50% { transform: scale(1.16) rotate(2deg); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #userName .verified-badge-wrap { animation: none; }
       }
 
       .verified-badge-icon {
@@ -2064,12 +2136,18 @@
       onerror="this.style.display = 'none'"
     />
 
+    <div class="bg-media water-background" id="waterBackground" aria-hidden="true">
+      <video id="waterBackgroundVideo" autoplay muted loop playsinline preload="auto"></video>
+      <canvas id="tapWaterCanvas"></canvas>
+    </div>
+
     <div class="ambient-orbs">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
     </div>
 
     <div class="particles-layer" id="particlesLayer"></div>
+    <canvas id="neonRibbonCanvas" class="neon-ribbon-canvas"></canvas>
 
     <div id="flyingPetsContainer">
       <div
@@ -2648,10 +2726,9 @@
           }
           waitingHearts.clear();
           setTimeout(() => {
-            button.classList.remove("is-receiving");
-            void button.offsetWidth;
-            button.classList.add("is-receiving");
-            setTimeout(() => button.classList.remove("is-receiving"), 240);
+            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              button.animate([{ transform: "scale(1)" }, { transform: "scale(1.14)" }, { transform: "scale(1)" }], { duration: 230, easing: "ease-out" });
+            }
           }, 630);
         }
         function resetTaps() {
@@ -3306,16 +3383,14 @@
       }
 
       function onEnd() {
+        if (!isDragging) return;
         clearTimeout(holdTimer);
         avatarImg.style.transform = "scale(1)";
-        if (!isDragging && !hasMoved) return;
         isDragging = false;
         if (hasMoved) {
           avatarBox.style.transition = "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)";
           avatarBox.style.transform = "translate(0px, 0px)";
-          setTimeout(() => {
-            avatarBox.style.transition = "";
-          }, 400);
+          setTimeout(() => { avatarBox.style.transition = ""; }, 400);
         }
       }
 
@@ -3605,6 +3680,7 @@
       function setThemeColor(color, glow, el) {
         document.documentElement.style.setProperty("--accent", color);
         document.documentElement.style.setProperty("--accent-glow", glow);
+        window.dispatchEvent(new CustomEvent("theme-color-change", { detail: { color, glow } }));
         document.querySelectorAll(".color-dot").forEach((d) => d.classList.remove("active"));
         el.classList.add("active");
       }
@@ -3624,28 +3700,47 @@
         profileCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
       });
 
-      profileCard.addEventListener(
-        "touchmove",
-        (e) => {
-          if (!e.touches || !e.touches[0]) return;
-          const touch = e.touches[0];
-          const rect = profileCard.getBoundingClientRect();
-          const x = touch.clientX - (rect.left + rect.width / 2);
-          const y = touch.clientY - (rect.top + rect.height / 2);
-          const rotateX = (-y / 16).toFixed(2);
-          const rotateY = (x / 16).toFixed(2);
-          profileCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        },
-        {
-          passive: true,
-        },
-      );
-
-      profileCard.addEventListener("touchend", () => {
-        setTimeout(() => {
+      let cardTouch = null;
+      let cardTouchFrame = null;
+      let cardTouchReset = null;
+      profileCard.addEventListener("touchstart", (event) => {
+        if (!event.touches || event.touches.length !== 1) return;
+        const point = event.touches[0];
+        cardTouch = { startX: point.clientX, startY: point.clientY, x: point.clientX, y: point.clientY, rect: null, applied: false };
+      }, { passive: true });
+      profileCard.addEventListener("touchmove", (event) => {
+        if (!cardTouch || !event.touches || event.touches.length !== 1) return;
+        const point = event.touches[0];
+        if (!cardTouch.rect && Math.hypot(point.clientX - cardTouch.startX, point.clientY - cardTouch.startY) < 8) return;
+        const state = cardTouch;
+        if (!state.rect) state.rect = profileCard.getBoundingClientRect();
+        state.x = point.clientX;
+        state.y = point.clientY;
+        if (cardTouchFrame !== null) return;
+        cardTouchFrame = requestAnimationFrame(() => {
+          cardTouchFrame = null;
+          if (cardTouch !== state) return;
+          clearTimeout(cardTouchReset);
+          const x = state.x - (state.rect.left + state.rect.width / 2);
+          const y = state.y - (state.rect.top + state.rect.height / 2);
+          profileCard.style.transform = 'perspective(1000px) rotateX(' + (-y / 16).toFixed(2) + 'deg) rotateY(' + (x / 16).toFixed(2) + 'deg)';
+          state.applied = true;
+        });
+      }, { passive: true });
+      function endCardTouch() {
+        const state = cardTouch;
+        cardTouch = null;
+        if (cardTouchFrame !== null) cancelAnimationFrame(cardTouchFrame);
+        cardTouchFrame = null;
+        if (!state || !state.applied) return;
+        clearTimeout(cardTouchReset);
+        cardTouchReset = setTimeout(() => {
           profileCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
         }, 300);
-      });
+      }
+      profileCard.addEventListener("touchend", endCardTouch, { passive: true });
+      profileCard.addEventListener("touchcancel", endCardTouch, { passive: true });
+
 
       document.addEventListener("keydown", (e) => {
         if (["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
@@ -4093,6 +4188,114 @@
         });
       })();
 
+            // =========================================
+      // HIỆU ỨNG VỆT CHUỘT DẢI LỤA NEON (NEON RIBBON TRAIL)
+      // =========================================
+      (function () {
+        const canvas = document.getElementById("neonRibbonCanvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+        const history = [];
+        const MAX_POINTS = 20;
+        let frame = null;
+        let hasPixels = false;
+        const initialTheme = getComputedStyle(document.documentElement);
+        let themeColor = initialTheme.getPropertyValue("--accent").trim() || "#f2eff0";
+        let glowColor = initialTheme.getPropertyValue("--accent-glow").trim() || themeColor;
+        window.addEventListener("theme-color-change", (event) => {
+          themeColor = event.detail.color;
+          glowColor = event.detail.glow;
+          if (history.length > 0) scheduleDraw();
+        });
+
+        function scheduleDraw() {
+          if (frame === null && !document.hidden) frame = requestAnimationFrame(drawRibbon);
+        }
+        function addPoint(x, y) {
+          history.push({ x, y, age: 0 });
+          if (history.length > MAX_POINTS) history.shift();
+          scheduleDraw();
+        }
+        window.addEventListener("resize", () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+          history.length = 0;
+          hasPixels = false;
+          if (frame !== null) cancelAnimationFrame(frame);
+          frame = null;
+        });
+        window.addEventListener("mousemove", (event) => {
+          if (event.sourceCapabilities && event.sourceCapabilities.firesTouchEvents) return;
+          addPoint(event.clientX, event.clientY);
+        }, { passive: true });
+        window.addEventListener("touchmove", (event) => {
+          if (!event.touches || !event.touches[0]) return;
+          addPoint(event.touches[0].clientX, event.touches[0].clientY);
+        }, { passive: true });
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) return;
+          if (frame !== null) cancelAnimationFrame(frame);
+          frame = null;
+          history.length = 0;
+          if (hasPixels) ctx.clearRect(0, 0, width, height);
+          hasPixels = false;
+        });
+        function drawRibbon() {
+          frame = null;
+          if (document.hidden) return;
+          if (history.length === 0) {
+            if (hasPixels) ctx.clearRect(0, 0, width, height);
+            hasPixels = false;
+            return;
+          }
+          ctx.clearRect(0, 0, width, height);
+          hasPixels = false;
+          for (let i = history.length - 1; i >= 0; i--) {
+            history[i].age++;
+            if (history[i].age > MAX_POINTS) history.splice(i, 1);
+          }
+          if (history.length > 2) {
+            hasPixels = true;
+            ctx.save();
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+
+            for (let i = 1; i < history.length; i++) {
+              const p1 = history[i - 1];
+              const p2 = history[i];
+              const progress = i / history.length;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = themeColor;
+              ctx.shadowColor = glowColor;
+              ctx.shadowBlur = progress * 16;
+              ctx.lineWidth = progress * 7.5 + 1;
+              ctx.globalAlpha = Math.pow(progress, 1.4);
+              ctx.stroke();
+            }
+            ctx.shadowBlur = 0;
+            for (let i = 1; i < history.length; i++) {
+              const p1 = history[i - 1];
+              const p2 = history[i];
+              const progress = i / history.length;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = themeColor;
+              ctx.lineWidth = progress * 2.2 + 0.5;
+              ctx.globalAlpha = progress * 0.9;
+              ctx.stroke();
+            }
+            ctx.restore();
+          }
+          if (history.length > 0) scheduleDraw();
+        }
+      })();
+
       function updatePreviewClock() {
         const el = document.getElementById("previewRealtime");
         if (!el) return;
@@ -4107,5 +4310,6 @@
 
       updatePreviewClock();
     </script>
+    <script src="tap-water.js"></script>
   </body></html
 >
